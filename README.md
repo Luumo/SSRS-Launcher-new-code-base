@@ -27,8 +27,8 @@ syftet med arbetet är att separera backend från frontend, för att köra koden
 * Möjlighet att använda koden med flera handlers (remote, lokalt, http)
 
 ## Att tänka på
-* Inga hårdkodningar i mjukvaran.
-* Om en variabel ska ändras, skriv en funktion som utför arbetet. Det blir mer lättläsligt och enklare att förstå vad som händer
+* Inga hårdkodningar i styrfunktionerna.
+* Om en variabel ska ändras, skriv en funktion som utför arbetet. Det blir mer lättläsligt och enklare att förstå vad som händer.
 * kommentera funktioner, argument och returns.
 * Använd styrfunktionerna för att reglera motorerna och launchern.
 
