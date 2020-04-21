@@ -12,6 +12,7 @@ from enum import Enum
 class EncoderError(Exception):
     pass
 
+# Classes with commands for manual pitch/lift/launch/rotation functions used in the launcher. 
 class PitchCMD(Enum):
     up = 1
     down = 2
@@ -104,6 +105,9 @@ class Launcher:
     def set_pitch_position(self, pitch_position):
         '''
         sets the pitch position of the launcher by the given pitch_position parameter.
+        Args:
+            pitch_position (float): desired pitch position for pitch motors in degrees
+
         '''
         if self.encoder_ready_check():
             # Checks conditions
@@ -128,7 +132,8 @@ class Launcher:
     def pitch_control(self, cmd: PitchCMD):
         '''
         Takes in a command (up, down or stop) and controlls the pitch accordingly
-        cmd example: Pitch.CMD
+        Args:
+            cmd (Pitch.CMD): desired movement command for  pitch motors (PitchCMD.up, PitchCMD.down, PitchCMD.stop)
         '''
         if  cmd == PitchCMD.up:
             self.rc.BackwardM1(self.address, self.pitch_speed_manual)
@@ -144,7 +149,8 @@ class Launcher:
     def set_rotation_position(self, rotation_position):
         '''
         sets the rotation position of the launcher by the given rotation_position parameter.
-        NOT USED YET. ONLY ON REAL LAUNCHER
+        Args:
+            rotation_position (float): desired rotation position for rotation motors in degrees
         '''
         if self.encoder_ready_check():
             # Checks conditions
@@ -169,6 +175,8 @@ class Launcher:
     def rotation_control(self, cmd: RotationCMD):
         '''
         Takes in a command (right, left or stop) and controlls the rotation accordingly
+        Args:
+            cmd (Rotation.CMD): desired movement command for  lift motors (Rotation.right, Rotation.left, Rotation.stop)
         '''
         if cmd == RotationCMD.right:
             self.rc.ForwardM1(self.address_2, self.rotation_speed_manual)
@@ -186,6 +194,8 @@ class Launcher:
     def set_lift_position(self, lift_position):
         '''
         sets the lift position of the launcher by the given lift_position parameter.
+        Args:
+            lift_position (float): desired lift position on lift motors in centimeters
         '''
         if self.encoder_ready_check():
             # Checks conditions
@@ -211,6 +221,8 @@ class Launcher:
     def lift_control(self, cmd: LiftCMD):
         '''
         Takes in a command (up, down or stop) and controlls the lift accordingly
+        Args:
+            cmd (LiftCMD): desired movement command for  lift motors (LiftCMD.up, LiftCMD.down, LiftCMD.stop)
         '''
         if cmd == LiftCMD.up:
             self.rc.ForwardM1(self.address_2, self.lift_speed_manual)
@@ -226,7 +238,8 @@ class Launcher:
     def set_launch_position(self, launch_position):
         '''
         sets the launch position of the launcher by the given launch_position parameter.
-        #TODO: Does this set AND launch? or only set? 
+        Args:
+            launch_position (float): desired launch position in centimeters
         '''
         if self.encoder_ready_check():
             # Checks conditions
@@ -267,7 +280,7 @@ class Launcher:
         '''
         Takes in a command (forwards, backwards or stop) and controlls the launch accordingly
         Args:
-            cmd (LaunchCMD): 
+            cmd (LaunchCMD): desired launch movement for launch motors, (for example: Launch.CMD.forwards)
         '''
         if cmd == LaunchCMD.forwards:
             self.rc.ForwardM2(self.address_2, self.launch_speed_manual)
@@ -338,7 +351,8 @@ class Launcher:
 # ---------------------------------------------------------------------------------
     def standby(self):
         '''
-        #TODO: This function should set the launcher to standby position (home)
+        Sets pitch, rotation, lift and launch to zero, which is the home position.
+
         '''
         self.set_pitch_position(0)
         self.set_rotation_position(0)
@@ -387,11 +401,6 @@ class Launcher:
 # ---------------------------------------------------------------------------------
 # ------------------------ Variable update functions-------------------------------
 # ---------------------------------------------------------------------------------
-
-    #TODO: Not sure if these are neccessary anymore.
-    #      pitch, lift, potation are set directly in their set_functions
-    #      I implemented them anyways, if the variables are needed in the future, or in other functions
-    #       It does only change the VARIABLES. It does not run and change the launcher motor positions.
 
     def change_pitch(self, pitch_position):
         if pitch_position > self.pitch_length or pitch_position < 0:
