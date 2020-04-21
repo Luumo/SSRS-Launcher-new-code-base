@@ -2,7 +2,7 @@
 # SSRS Launcher
 
 ## Syfte:
-syftet med arbetet är att separera backend från frontend, för att köra koden mer lättläslig, enklare att felsöka och använda. 
+Syftet med arbetet är att separera backend från frontend, för att köra koden mer lättläslig, enklare att felsöka och använda. 
 
 ## Mål:
 * Separera styrfunktioner och frontend
@@ -34,7 +34,10 @@ syftet med arbetet är att separera backend från frontend, för att köra koden
 
 * Separera styrfunktioner från handlern (t ex flask). 
 
-
+## TODO:
+* Jämför detta program med ursprungliga launcher-programmet och skriv klart de funktioner som är kvar. (Alla funktioner behövs ej)
+* Testa varje enskild funktion, så de fungerar som tänkt.
+* Se över remote-handlern från Airpelago. Den kan behövas skrivas om också.
 
 # Översikt av funktioner
 
